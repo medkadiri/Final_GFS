@@ -39,7 +39,7 @@ class Master():
         background_thread.start()
         print('master initialized')
         your_rest_server_port = 9000
-        eureka_client.init(eureka_server="http://localhost:8761",
+        eureka_client.init(eureka_server="http://10.172.0.2:8761",
                                 app_name="Master",
                                 instance_port=your_rest_server_port, instance_id="1")
         print('master registered')
@@ -393,7 +393,7 @@ def main():
         print("Invalid number of replicas")
         return
 
-    master_server = SimpleXMLRPCServer(('localhost', 9000), allow_none=True)
+    master_server = SimpleXMLRPCServer(('10.172.0.3', 9000), allow_none=True)
     master_server.register_introspection_functions()
     master_server.register_instance(Master(n_replicas))
     master_server.serve_forever()
